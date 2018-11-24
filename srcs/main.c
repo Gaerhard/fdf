@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 10:34:15 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/23 21:05:32 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/11/24 12:29:41 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		main(int argc, char **argv)
 	}
 	p->mlx_ptr = mlx_init();
 	p->win_ptr = mlx_new_window(p->mlx_ptr, 1000, 1000, "fdf");
-	draw_map(p, g.y, g.x, tab);
+	draw_map(p, g, tab);
 	mlx_loop(p->mlx_ptr);
 	return (0);
 }

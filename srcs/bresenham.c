@@ -6,13 +6,13 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 11:21:08 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/24 11:36:51 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/11/24 12:38:28 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	draw_line_y(int x1, int y1, int x2, int y2, t_mlx *mlx)
+static int	draw_line_y(t_point *p, t_mlx *mlx)
 {
 	t_incr	incr;
 	int		error;
@@ -20,23 +20,25 @@ static void	draw_line_y(int x1, int y1, int x2, int y2, t_mlx *mlx)
 	int		y;
 	int		i;
 
-	incr.xincr = (x1 < x2 ? 1 : -1);
-	incr.yincr = (y1 < y2 ? 1 : -1);
-	x = x1;
+	incr.xincr = (p->x1 < p->x2 ? 1 : -1);
+	incr.yincr = (p->y1 < p->y2 ? 1 : -1);
+	x = p->x1;
 	i = -1;
-	y = y1;
-	error = ft_abs(y2 - y1);
-	while (++i < ft_abs(y2 - y1))
+	y = p->y1;
+	error = ft_abs(p->y2 - p->y1);
+	while (++i < ft_abs(p->y2 - p->y1))
 	{
 		y += incr.yincr;
-		error += ft_abs(x2 - x1) * 2;
-		x += (error > ft_abs(y2 - y1) ? incr.xincr : 0);
-		error -= (error > ft_abs(y2 - y1) ? (ft_abs(y2 - y1) * 2) : 0);
+		error += ft_abs(p->x2 - p->x1) * 2;
+		x += (error > ft_abs(p->y2 - p->y1) ? incr.xincr : 0);
+		error -= (error > ft_abs(p->y2 - p->y1) ?
+				(ft_abs(p->y2 - p->y1) * 2) : 0);
 		mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, x, y, 0x00FFFFFF);
 	}
+	return (1);
 }
 
-void		draw_line(int x1, int y1, int x2, int y2, t_mlx *mlx)
+int			draw_line(t_point *p, t_mlx *mlx)
 {
 	t_incr	incr;
 	int		error;
@@ -44,23 +46,22 @@ void		draw_line(int x1, int y1, int x2, int y2, t_mlx *mlx)
 	int		y;
 	int		i;
 
-	incr.xincr = (x1 < x2 ? 1 : -1);
-	incr.yincr = (y1 < y2 ? 1 : -1);
-	x = x1;
+	incr.xincr = (p->x1 < p->x2 ? 1 : -1);
+	incr.yincr = (p->y1 < p->y2 ? 1 : -1);
+	x = p->x1;
 	i = -1;
-	y = y1;
-	if (ft_abs(x2 - x1) < ft_abs(y2 - y1))
-		draw_line_y(x1, y1, x2, y2, mlx);
-	else
+	y = p->y1;
+	if (ft_abs(p->x2 - p->x1) < ft_abs(p->y2 - p->y1))
+		return (draw_line_y(p, mlx));
+	error = ft_abs(p->x2 - p->x1);
+	while (++i < ft_abs(p->x2 - p->x1))
 	{
-		error = ft_abs(x2 - x1);
-		while (++i < ft_abs(x2 - x1))
-		{
-			x += incr.xincr;
-			error += ft_abs(y2 - y1) * 2;
-			y += (error > ft_abs(x2 - x1) ? incr.yincr : 0);
-			error -= (error > ft_abs(x2 - x1) ? (ft_abs(x2 - x1) * 2) : 0);
-			mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, x, y, 0x00FFFFFF);
-		}
+		x += incr.xincr;
+		error += ft_abs(p->y2 - p->y1) * 2;
+		y += (error > ft_abs(p->x2 - p->x1) ? incr.yincr : 0);
+		error -= (error > ft_abs(p->x2 - p->x1) ?
+				(ft_abs(p->x2 - p->x1) * 2) : 0);
+		mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, x, y, 0x00FFFFFF);
 	}
+	return (1);
 }
