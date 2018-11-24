@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 10:34:15 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/22 19:04:33 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/11/23 21:05:32 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int		main(int argc, char **argv)
 		if (!(tab = malloc(sizeof(int*) * g.y)))
 			return (ft_print_return("Failed to malloc correct size", 2));
 		if ((g.x = stoi(lst, &tab)) == 0)
-			ft_print_return("Invalid file", 2);
+			return (ft_print_return("Invalid file", 2));
 	}
 	p->mlx_ptr = mlx_init();
 	p->win_ptr = mlx_new_window(p->mlx_ptr, 1000, 1000, "fdf");
-	draw_line_x(500, 500, 400, 700, p);
+	draw_map(p, g.y, g.x, tab);
 	mlx_loop(p->mlx_ptr);
 	return (0);
 }

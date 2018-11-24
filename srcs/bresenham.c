@@ -6,19 +6,19 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 11:21:08 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/22 18:56:46 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/11/24 11:36:51 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_line_y(int x1, int y1, int x2, int y2, t_mlx *mlx)
+static void	draw_line_y(int x1, int y1, int x2, int y2, t_mlx *mlx)
 {
-	t_incr incr;
-	int error;
-	int x;
-	int y;
-	int i;
+	t_incr	incr;
+	int		error;
+	int		x;
+	int		y;
+	int		i;
 
 	incr.xincr = (x1 < x2 ? 1 : -1);
 	incr.yincr = (y1 < y2 ? 1 : -1);
@@ -36,13 +36,13 @@ void	draw_line_y(int x1, int y1, int x2, int y2, t_mlx *mlx)
 	}
 }
 
-void	draw_line_x(int x1, int y1, int x2, int y2, t_mlx *mlx)
+void		draw_line(int x1, int y1, int x2, int y2, t_mlx *mlx)
 {
-	t_incr incr;
-	int error;
-	int x;
-	int y;
-	int i;
+	t_incr	incr;
+	int		error;
+	int		x;
+	int		y;
+	int		i;
 
 	incr.xincr = (x1 < x2 ? 1 : -1);
 	incr.yincr = (y1 < y2 ? 1 : -1);

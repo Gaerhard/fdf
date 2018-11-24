@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 21:04:30 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/22 16:15:37 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/11/23 21:05:11 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct	s_incr
 
 t_list			*reader(char *s);
 int				stoi(t_list *begin_list, int ***tab);
-void			draw_line_x(int x1, int y1, int x2, int y2, t_mlx *mlx);
-void			draw_line_y(int x1, int y1, int x2, int y2, t_mlx *mlx);
+void			draw_line(int x1, int y1, int x2, int y2, t_mlx *mlx);
+void			draw_map(t_mlx *p, int nx, int ny, int **tab);
 
 #endif
