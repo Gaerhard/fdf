@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 19:22:56 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/21 14:53:59 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/11/24 18:50:45 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			stoi(t_list *begin_list, int ***tab)
 		if (!(tab[0][++i] = malloc(sizeof(int*) * array_size(array))))
 			return (0);
 		while (array[++j])
-			tab[0][i][j] = ft_atoi(array[j]);
+			tab[0][i][j] = atoi(array[j]);
 		clean_array(&array);
 		lst = lst->next;
 	}

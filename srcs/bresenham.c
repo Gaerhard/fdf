@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 11:21:08 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/24 12:38:28 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/11/24 19:19:46 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	draw_line_y(t_point *p, t_mlx *mlx)
 {
 	t_incr	incr;
-	int		error;
 	int		x;
 	int		y;
 	int		i;
@@ -25,13 +24,13 @@ static int	draw_line_y(t_point *p, t_mlx *mlx)
 	x = p->x1;
 	i = -1;
 	y = p->y1;
-	error = ft_abs(p->y2 - p->y1);
+	incr.error = ft_abs(p->y2 - p->y1);
 	while (++i < ft_abs(p->y2 - p->y1))
 	{
 		y += incr.yincr;
-		error += ft_abs(p->x2 - p->x1) * 2;
-		x += (error > ft_abs(p->y2 - p->y1) ? incr.xincr : 0);
-		error -= (error > ft_abs(p->y2 - p->y1) ?
+		incr.error += ft_abs(p->x2 - p->x1) * 2;
+		x += (incr.error > ft_abs(p->y2 - p->y1) ? incr.xincr : 0);
+		incr.error -= (incr.error > ft_abs(p->y2 - p->y1) ?
 				(ft_abs(p->y2 - p->y1) * 2) : 0);
 		mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, x, y, 0x00FFFFFF);
 	}
@@ -41,7 +40,6 @@ static int	draw_line_y(t_point *p, t_mlx *mlx)
 int			draw_line(t_point *p, t_mlx *mlx)
 {
 	t_incr	incr;
-	int		error;
 	int		x;
 	int		y;
 	int		i;
@@ -53,13 +51,13 @@ int			draw_line(t_point *p, t_mlx *mlx)
 	y = p->y1;
 	if (ft_abs(p->x2 - p->x1) < ft_abs(p->y2 - p->y1))
 		return (draw_line_y(p, mlx));
-	error = ft_abs(p->x2 - p->x1);
+	incr.error = ft_abs(p->x2 - p->x1);
 	while (++i < ft_abs(p->x2 - p->x1))
 	{
 		x += incr.xincr;
-		error += ft_abs(p->y2 - p->y1) * 2;
-		y += (error > ft_abs(p->x2 - p->x1) ? incr.yincr : 0);
-		error -= (error > ft_abs(p->x2 - p->x1) ?
+		incr.error += ft_abs(p->y2 - p->y1) * 2;
+		y += (incr.error > ft_abs(p->x2 - p->x1) ? incr.yincr : 0);
+		incr.error -= (incr.error > ft_abs(p->x2 - p->x1) ?
 				(ft_abs(p->x2 - p->x1) * 2) : 0);
 		mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, x, y, 0x00FFFFFF);
 	}

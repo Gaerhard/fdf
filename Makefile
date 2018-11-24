@@ -6,7 +6,7 @@
 #    By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/19 10:40:16 by gaerhard          #+#    #+#              #
-#    Updated: 2018/11/23 12:45:06 by gaerhard         ###   ########.fr        #
+#    Updated: 2018/11/24 18:51:27 by gaerhard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ MLXFLAGS = -lmlx -framework OPENGL -framework AppKit
 all : $(NAME)
 
 $(NAME): $(OBJ)
-	gcc $(CFLAGS) $(MLXFLAGS) -I $(INCLUDES) $(OBJ) $(LIB) -o $(NAME)
+	gcc $(CFLAGS) $(MLXFLAGS) $(OBJ) $(LIB) -o $(NAME)
 
 clean :
 	rm -f $(OBJ)

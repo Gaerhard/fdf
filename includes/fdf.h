@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 21:04:30 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/24 12:37:12 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/11/24 19:17:23 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@ typedef struct	s_point
 
 typedef struct	s_incr
 {
+	int			error;
 	int			xincr;
 	int			yincr;
 }				t_incr;
 
 t_list			*reader(char *s);
 int				stoi(t_list *begin_list, int ***tab);
-int			draw_line(t_point *p, t_mlx *mlx);
+int				draw_line(t_point *p, t_mlx *mlx);
+int				key_press(int key, t_mlx *p);
 void			draw_map(t_mlx *p, t_size size, int **tab);
 
 #endif
