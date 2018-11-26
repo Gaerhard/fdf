@@ -6,12 +6,13 @@
 #    By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/19 10:40:16 by gaerhard          #+#    #+#              #
-#    Updated: 2018/11/24 18:51:27 by gaerhard         ###   ########.fr        #
+#    Updated: 2018/11/26 16:20:51 by gaerhard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
-SRCS = srcs/main.c srcs/parsing.c srcs/bresenham.c srcs/graphic.c
+SRCS = srcs/main.c srcs/parsing.c srcs/bresenham.c srcs/graphic.c \
+	   srcs/graphic_2.c
 LIB = libft/libft.a
 INCLUDES = ./includes
 OBJ = $(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 21:04:30 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/24 19:17:23 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/11/26 16:25:08 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct	s_point
 	int			x2;
 	int			y2;
 	int			z2;
+	int			v_scale;
+	int			scale;
 }				t_point;
 
 typedef struct	s_incr
@@ -49,5 +51,6 @@ int				stoi(t_list *begin_list, int ***tab);
 int				draw_line(t_point *p, t_mlx *mlx);
 int				key_press(int key, t_mlx *p);
 void			draw_map(t_mlx *p, t_size size, int **tab);
+int				highest_point(int **tab, t_size size);
 
 #endif
