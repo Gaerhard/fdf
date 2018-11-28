@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 10:20:48 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/28 11:35:18 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/11/28 16:46:16 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,14 @@ static int		py(int x, int y)
 	return (y - x);
 }
 
-static	t_point	*calc_coords(t_point *p, t_size size, int **tab, t_size s)
+static	t_all	*calc_coords(t_all *p)
 {
-	(void)size;
-	p->x1 = px(s.x, s.y) * p->scale;
-	p->z1 = tab[s.y][s.x];
-	p->y1 = py(s.x, s.y) * p->scale + size.height / 2 - p->z1;
-	p->x2 = px(s.x + 1, s.y) * p->scale;
-	p->z2 = tab[s.y][s.x + 1];
-	p->y2 = py(s.x + 1, s.y) * p->scale + size.height / 2 - p->z2;
+	p->x1 = px(p->x, p->y) * p->scale;
+	p->z1 = p->tab[p->y][p->x];
+	p->y1 = py(p->x, p->y) * p->scale + p->height / 2 - p->z1;
+	p->x2 = px(p->x + 1, p->y) * p->scale;
+	p->z2 = p->tab[p->y][p->x + 1];
+	p->y2 = py(p->x + 1, p->y) * p->scale + p->height / 2 - p->z2;
 	if (p->z1 <= 0)
 		p->color1 = 0x00009FFF - ft_abs(p->z1);
 	else if (p->z1 >= 1 && p->z1 <= 40)
@@ -50,15 +49,14 @@ static	t_point	*calc_coords(t_point *p, t_size size, int **tab, t_size s)
 	return (p);
 }
 
-static	t_point	*calc_coords_2(t_point *p, t_size size, int **tab, t_size s)
+static	t_all	*calc_coords_2(t_all *p)
 {
-	(void)size;
-	p->x1 = px(s.x, s.y) * p->scale;
-	p->z1 = tab[s.y][s.x];
-	p->y1 = py(s.x, s.y) * p->scale + size.height / 2 - p->z1;
-	p->x2 = px(s.x, s.y + 1) * p->scale;
-	p->z2 = tab[s.y + 1][s.x];
-	p->y2 = py(s.x, s.y + 1) * p->scale + size.height / 2 - p->z2;
+	p->x1 = px(p->x, p->y) * p->scale;
+	p->z1 = p->tab[p->y][p->x];
+	p->y1 = py(p->x, p->y) * p->scale + p->height / 2 - p->z1;
+	p->x2 = px(p->x, p->y + 1) * p->scale;
+	p->z2 = p->tab[p->y + 1][p->x];
+	p->y2 = py(p->x, p->y + 1) * p->scale + p->height / 2 - p->z2;
 	if (p->z1 <= 0)
 		p->color1 = 0x00009FFF - ft_abs(p->z1);
 	else if (p->z1 >= 1 && p->z1 <= 40)
@@ -88,35 +86,23 @@ static	t_point	*calc_coords_2(t_point *p, t_size size, int **tab, t_size s)
 **	s = struct to used to know what coord of tab am I working with
 */
 
-void			draw_map(t_mlx *mlx, t_size size, int **tab)
+void			draw_map(t_all *p)
 {
-	t_point *p;
-	t_size	s;
-
-	p = malloc(sizeof(*p));
-	p->scale = (size.x > size.y) ? (size.length / 4) / size.x : (size.length / 4) / size.y;
+	p->scale = (p->n_col > p->n_line) ?
+		(p->length / 4) / p->n_col : (p->length / 4) / p->n_line;
 	p->scale = (p->scale == 0) ? 1 : p->scale;
-	s.y = -1;
-	while (++(s.y) < size.y)
+	p->y = -1;
+	while (++(p->y) < p->n_line)
 	{
-		s.x = -1;
-		while (++(s.x) < size.x - 1)
-			draw_line(calc_coords(p, size, tab, s), mlx);
-	//	ft_putnbr(calc_coords(p, size, tab, s)->x1);
-	//	ft_putchar(' ');
-	//	ft_putnbr(calc_coords(p, size, tab, s)->x2);
-	//	ft_putchar(' ');
-	//	ft_putnbr(calc_coords(p, size, tab, s)->y1);
-	//	ft_putchar(' ');
-	//	ft_putnbr(calc_coords(p, size, tab, s)->y2);
-	//	ft_putchar(' ');
+		p->x = -1;
+		while (++(p->x) < p->n_col - 1)
+			draw_line(calc_coords(p));
 	}
-	s.y = -1;
-	while (++(s.y) < size.y - 1)
+	p->y = -1;
+	while (++(p->y) < p->n_line - 1)
 	{
-		s.x = -1;
-		while (++(s.x) < size.x)
-			draw_line(calc_coords_2(p, size, tab, s), mlx);
+		p->x = -1;
+		while (++(p->x) < p->n_col)
+			draw_line(calc_coords_2(p));
 	}
-	free(p);
 }

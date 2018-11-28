@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:56:47 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/28 15:01:42 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/11/28 16:51:24 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		highest_point(int **tab, t_size size)
 	return (res);
 }
 */
-int		ft_color(t_point *p, int x, int y)
+int		ft_color(t_all *p, int x, int y)
 {
 	double	perc;
 	int		red;
