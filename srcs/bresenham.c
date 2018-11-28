@@ -6,13 +6,13 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 11:21:08 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/24 19:19:46 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/11/27 16:06:36 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	draw_line_y(t_point *p, t_mlx *mlx)
+static int		draw_line_y(t_point *p, t_mlx *mlx)
 {
 	t_incr	incr;
 	int		x;
@@ -32,12 +32,12 @@ static int	draw_line_y(t_point *p, t_mlx *mlx)
 		x += (incr.error > ft_abs(p->y2 - p->y1) ? incr.xincr : 0);
 		incr.error -= (incr.error > ft_abs(p->y2 - p->y1) ?
 				(ft_abs(p->y2 - p->y1) * 2) : 0);
-		mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, x, y, 0x00FFFFFF);
+		mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, x, y, ft_color(p, x, y));
 	}
 	return (1);
 }
 
-int			draw_line(t_point *p, t_mlx *mlx)
+int				draw_line(t_point *p, t_mlx *mlx)
 {
 	t_incr	incr;
 	int		x;
@@ -59,7 +59,7 @@ int			draw_line(t_point *p, t_mlx *mlx)
 		y += (incr.error > ft_abs(p->x2 - p->x1) ? incr.yincr : 0);
 		incr.error -= (incr.error > ft_abs(p->x2 - p->x1) ?
 				(ft_abs(p->x2 - p->x1) * 2) : 0);
-		mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, x, y, 0x00FFFFFF);
+		mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, x, y, ft_color(p, x, y));
 	}
 	return (1);
 }

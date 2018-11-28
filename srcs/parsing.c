@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 19:22:56 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/24 18:50:45 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/11/27 18:41:19 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ int			stoi(t_list *begin_list, int ***tab)
 	while (lst)
 	{
 		j = -1;
-		array = ft_split(lst->content, " \t");
+		array = ft_strsplit(lst->content, ' ');
 		if (n_coords != -1 && n_coords != array_size(array))
 			return (0);
 		n_coords = array_size(array);
 		if (!(tab[0][++i] = malloc(sizeof(int*) * array_size(array))))
 			return (0);
 		while (array[++j])
-			tab[0][i][j] = atoi(array[j]);
+			tab[0][i][j] = ft_atoi(array[j]);
 		clean_array(&array);
 		lst = lst->next;
 	}

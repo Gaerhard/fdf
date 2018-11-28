@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 10:34:15 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/26 19:21:09 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/11/28 15:04:45 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@
 **	free(tab[0]);
 **}
 */
+
+int		init(t_mlx *p, t_size g, int **tab)
+{
+	g.length = (g.x * 4 + 50 > 1000) ? g.x * 4 + 50 : 1000;
+	g.height = (g.y * 2 > 1000) ? (g.y * 2) : 1000;
+	if (!(p->mlx_ptr = mlx_init()))
+		return (-1);
+	if (!(p->win_ptr = mlx_new_window(p->mlx_ptr, g.length , g.height, "fdf")))
+		return (-1);
+	draw_map(p, g, tab);
+	mlx_key_hook(p->win_ptr, key_press, p);
+	mlx_loop(p->mlx_ptr);
+	return (0);
+}
 
 int		key_press(int key, t_mlx *p)
 {
@@ -56,10 +70,7 @@ int		main(int argc, char **argv)
 		if ((g.x = stoi(lst, &tab)) == 0)
 			return (ft_print_return("Invalid file", 2));
 	}
-	p->mlx_ptr = mlx_init();
-	p->win_ptr = mlx_new_window(p->mlx_ptr, 1000, 1000, "fdf");
-	draw_map(p, g, tab);
-	mlx_key_hook(p->win_ptr, key_press, p);
-	mlx_loop(p->mlx_ptr);
+	if (init (p, g, tab) < 0)
+		return (0);
 	return (0);
 }
