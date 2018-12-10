@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 10:20:48 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/28 16:46:16 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/08 18:59:28 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,58 +22,58 @@ static int		py(int x, int y)
 	return (y - x);
 }
 
-static	t_all	*calc_coords(t_all *p)
+static	t_env	*calc_coords(t_env *e)
 {
-	p->x1 = px(p->x, p->y) * p->scale;
-	p->z1 = p->tab[p->y][p->x];
-	p->y1 = py(p->x, p->y) * p->scale + p->height / 2 - p->z1;
-	p->x2 = px(p->x + 1, p->y) * p->scale;
-	p->z2 = p->tab[p->y][p->x + 1];
-	p->y2 = py(p->x + 1, p->y) * p->scale + p->height / 2 - p->z2;
-	if (p->z1 <= 0)
-		p->color1 = 0x00009FFF - ft_abs(p->z1);
-	else if (p->z1 >= 1 && p->z1 <= 40)
-		p->color1 = 0x00009F40 + (p->z1 * 0x00050000);
-	else if (p->z1 >= 41 && p->z1 <= 70)
-		p->color1 = 0x00999999 + p->z1 * 0x00111111;
-	else if (p->z1 >= 71)
-		p->color1 = 0x00FFFFFF;
-	if (p->z2 <= 0)
-		p->color2 = 0x00009FFF - ft_abs(p->z2);
-	else if (p->z2 >= 1 && p->z2 <= 40)
-		p->color2 = 0x00009F40 + (p->z2 * 0x00050000);
-	else if (p->z2 >= 41 && p->z2 <= 70)
-		p->color2 = 0x00999999 + p->z2 * 0x00111111;
-	else if(p->z2 > 70)	
-		p->color2 = 0x00FFFFFF;
-	return (p);
+	e->v1.x = px(e->x, e->y) * e->m.scale;
+	e->v1.z = e->m.tab[e->y][e->x] * e->sc;
+	e->v1.y = py(e->x, e->y) * e->m.scale + e->m.height / 2 - e->v1.z;
+	e->v2.x = px(e->x + 1, e->y) * e->m.scale;
+	e->v2.z = e->m.tab[e->y][e->x + 1] * e->sc;
+	e->v2.y = py(e->x + 1, e->y) * e->m.scale + e->m.height / 2 - e->v2.z;
+	if (e->v1.z <= 0)
+		e->v1.c = 0x00009FFF;
+	else if (e->v1.z >= 1 && e->v1.z <= 40)
+		e->v1.c = 0x00009F40 + (e->v1.z * 0x00050000);
+	else if (e->v1.z >= 41 && e->v1.z <= 70)
+		e->v1.c = 0x00999999 + e->v1.z * 0x00111111;
+	else if (e->v1.z >= 71)
+		e->v1.c = 0x00FFFFFF;
+	if (e->v2.z <= 0)
+		e->v2.c = 0x00009FFF;
+	else if (e->v2.z >= 1 && e->v2.z <= 40)
+		e->v2.c = 0x00009F40 + (e->v2.z * 0x00050000);
+	else if (e->v2.z >= 41 && e->v2.z <= 70)
+		e->v2.c = 0x00999999 + e->v2.z * 0x00111111;
+	else if(e->v2.z > 70)	
+		e->v2.c = 0x00FFFFFF;
+	return (e);
 }
 
-static	t_all	*calc_coords_2(t_all *p)
+static	t_env	*calc_coords_2(t_env *e)
 {
-	p->x1 = px(p->x, p->y) * p->scale;
-	p->z1 = p->tab[p->y][p->x];
-	p->y1 = py(p->x, p->y) * p->scale + p->height / 2 - p->z1;
-	p->x2 = px(p->x, p->y + 1) * p->scale;
-	p->z2 = p->tab[p->y + 1][p->x];
-	p->y2 = py(p->x, p->y + 1) * p->scale + p->height / 2 - p->z2;
-	if (p->z1 <= 0)
-		p->color1 = 0x00009FFF - ft_abs(p->z1);
-	else if (p->z1 >= 1 && p->z1 <= 40)
-		p->color1 = 0x00009F40 + (p->z1 * 0x00050000);
-	else if (p->z1 >= 41 && p->z1 <= 70)
-		p->color1 = 0x00999999 + p->z1 * 0x00111111;
-	else if (p->z1 >= 71)
-		p->color1 = 0x00FFFFFF;
-	if (p->z2 <= 0)
-		p->color2 = 0x00009FFF - ft_abs(p->z2);
-	else if (p->z2 >= 1 && p->z2 <= 40)
-		p->color2 = 0x00009F40 + (p->z2 * 0x00050000);
-	else if (p->z2 >= 41 && p->z2 <= 70)
-		p->color2 = 0x00999999 + p->z2 * 0x00111111;
-	else if(p->z2 > 70)	
-		p->color2 = 0x00FFFFFF;
-	return (p);
+	e->v1.x = px(e->x, e->y) * e->m.scale;
+	e->v1.z = e->m.tab[e->y][e->x] * e->sc;
+	e->v1.y = py(e->x, e->y) * e->m.scale + e->m.height / 2 - e->v1.z;
+	e->v2.x = px(e->x, e->y + 1) * e->m.scale;
+	e->v2.z = e->m.tab[e->y + 1][e->x] * e->sc;
+	e->v2.y = py(e->x, e->y + 1) * e->m.scale + e->m.height / 2 - e->v2.z;
+	if (e->v1.z <= 0)
+		e->v1.c = 0x00009FFF/* - ft_abs(e->v1.z)*/;
+	else if (e->v1.z >= 1 && e->v1.z <= 40)
+		e->v1.c = 0x00009F40 + (e->v1.z * 0x00050000);
+	else if (e->v1.z >= 41 && e->v1.z <= 70)
+		e->v1.c = 0x00999999 + e->v1.z * 0x00111111;
+	else if (e->v1.z >= 71)
+		e->v1.c = 0x00FFFFFF;
+	if (e->v2.z <= 0)
+		e->v2.c = 0x00009FFF/* - ft_abs(e->v2.z)*/;
+	else if (e->v2.z >= 1 && e->v2.z <= 40)
+		e->v2.c = 0x00009F40 + (e->v2.z * 0x00050000);
+	else if (e->v2.z >= 41 && e->v2.z <= 70)
+		e->v2.c = 0x00999999 + e->v2.z * 0x00111111;
+	else if(e->v2.z > 70)	
+		e->v2.c = 0x00FFFFFF;
+	return (e);
 }
 
 /*
@@ -86,23 +86,24 @@ static	t_all	*calc_coords_2(t_all *p)
 **	s = struct to used to know what coord of tab am I working with
 */
 
-void			draw_map(t_all *p)
+void			draw_map(t_env *e)
 {
-	p->scale = (p->n_col > p->n_line) ?
-		(p->length / 4) / p->n_col : (p->length / 4) / p->n_line;
-	p->scale = (p->scale == 0) ? 1 : p->scale;
-	p->y = -1;
-	while (++(p->y) < p->n_line)
+	e->m.scale = (e->m.nc > e->m.nl) ?
+		(e->m.width / 4) / e->m.nc : (e->m.width / 4) / e->m.nl;
+	e->m.scale = (e->m.scale == 0) ? 1 : e->m.scale;
+	e->y = -1;
+	while (++(e->y) < e->m.nl)
 	{
-		p->x = -1;
-		while (++(p->x) < p->n_col - 1)
-			draw_line(calc_coords(p));
+		e->x = -1;
+		while (++(e->x) < e->m.nc - 1)
+			draw_line(calc_coords(e));
 	}
-	p->y = -1;
-	while (++(p->y) < p->n_line - 1)
+	e->y = -1;
+	while (++(e->y) < e->m.nl - 1)
 	{
-		p->x = -1;
-		while (++(p->x) < p->n_col)
-			draw_line(calc_coords_2(p));
+		e->x = -1;
+		while (++(e->x) < e->m.nc)
+			draw_line(calc_coords_2(e));
 	}
+	mlx_put_image_to_window(e->p.mlx, e->p.win, e->img.ptr, 0, 0);
 }

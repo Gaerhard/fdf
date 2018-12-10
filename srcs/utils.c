@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:56:47 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/28 16:51:24 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/08 15:30:32 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,19 @@ int		highest_point(int **tab, t_size size)
 	return (res);
 }
 */
-int		ft_color(t_all *p, int x, int y)
+int		ft_color(t_env *e, int x, int y)
 {
 	double	perc;
 	int		red;
 	int		green;
 	int		blue;
 
-	if (ft_abs(p->x2 - p->x1) > ft_abs(p->y2 - p->y1))
-		perc = percent(p->x1, p->x2, x);
+	if (e->delta_x > e->delta_y)
+		perc = percent(e->v1.x, e->v2.x, x);
 	else
-		perc = percent(p->y1, p->y2, y);
-	red = get_light((p->color1 >> 16) & 0xFF, (p->color2 >>16) & 0xFF, perc);
-	green = get_light((p->color1 >> 8) & 0xFF, (p->color2 >> 8) & 0xFF, perc);
-	blue = get_light((p->color1) & 0xFF, (p->color2) & 0xFF, perc);
+		perc = percent(e->v1.y, e->v2.y, y);
+	red = get_light((e->v1.c >> 16) & 0xFF, (e->v2.c >>16) & 0xFF, perc);
+	green = get_light((e->v1.c >> 8) & 0xFF, (e->v2.c >> 8) & 0xFF, perc);
+	blue = get_light((e->v1.c) & 0xFF, (e->v2.c) & 0xFF, perc);
 	return ((red <<16) | (green << 8)| blue);
 }

@@ -5,34 +5,50 @@
 #                                                     +:+ +:+         +:+      #
 #    By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/11/19 10:40:16 by gaerhard          #+#    #+#              #
-#    Updated: 2018/11/28 18:23:14 by gaerhard         ###   ########.fr        #
+#    Created: 2018/11/29 15:24:01 by gaerhard          #+#    #+#              #
+#    Updated: 2018/12/05 15:57:45 by gaerhard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
-SRCS = srcs/main.c srcs/parsing.c srcs/bresenham.c srcs/graphic.c srcs/utils.c \
-	   srcs/events.c
+SRC = srcs/main.c srcs/parsing.c srcs/events.c srcs/graphic.c srcs/utils.c \
+	  srcs/bresenham.c
+OBJ = $(SRC:.c=.o)
 LIB = libft/libft.a
-INCLUDES = ./includes
-OBJ = $(SRCS:.c=.o)
-CFLAGS = -Wall -Werror -Wextra -I$(INCLUDES)
-MLXFLAGS = -lmlx -framework OPENGL -framework AppKit
-all : $(NAME)
+INCLUDES = includes
+CFLAGS = -Wall -Wextra -Werror -I $(INCLUDES)
+MLXFLAGS = -lmlx -framework OPENgL -framework AppKit
+RED := "\033[0;31m"
+GREEN := "\033[0;32m"
+CYAN := "\033[0;36m"
+WHITE :="\033[0m"
+
+all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc $(CFLAGS) $(MLXFLAGS) $(OBJ) $(LIB) -o $(NAME)
+	@make -C libft
+	@gcc $(CFLAGS) $(MLXFLAGS) $(OBJ) $(LIB) -o $(NAME)
+	@echo ${GREEN}"[INFO] Compiled [$(NAME)] executable successfully!"${WHITE}
 
-clean :
-	rm -f $(OBJ)
+clean: 
+	@rm -Rf $(OBJ)
+	@echo ${CYAN}"[INFO] Removed [$(OBJ)] successfully!"${WHITE}
 
-fclean : clean
-	rm -f $(NAME)
+fclean: clean
+	@rm -Rf libft/libft.a
+	@rm -Rf fillit
+	@echo ${CYAN}"[INFO] Removed everything"${WHITE}
 
-lib :
-	make -C libft/
+re: fclean all
 
-relib :
-	make re -C libft/
+lib:
+	@make -C libft
 
-re : fclean lib all
+relib:
+	@make re -C libft
+
+fclean_lib: fclean
+	@make fclean -C libft
+
+.SILENT: $(OBJ)
+.PHONY: fclean all clean

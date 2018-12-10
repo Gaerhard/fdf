@@ -6,7 +6,7 @@
 #    By: gaerhard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 11:40:17 by gaerhard          #+#    #+#              #
-#    Updated: 2018/11/21 14:34:14 by gaerhard         ###   ########.fr        #
+#    Updated: 2018/11/29 15:15:47 by gaerhard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,17 +29,27 @@ SRCS = ft_memccpy.c ft_memcpy.c ft_memset.c ft_bzero.c ft_memmove.c \
 INCLUDES = ../includes
 OBJ = $(SRCS:.c=.o)
 CFLAGS = -Wall -Werror -Wextra -I $(INCLUDES)
+RED := "\033[0;31m"
+GREEN := "\033[0;32m"
+BLUE := "\033[0;34m"
+YELLOW := "\033[0;33m"
+PURPLE := "\033[0;35m"
+WHITE := "\033[0m"
+
 all: $(NAME)
 
 $(NAME) : $(OBJ)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
+	@echo ${YELLOW}"[INFO] Created libft.a successfully!"${WHITE}
 
 clean :
-	/bin/rm -f $(OBJ)
+	@/bin/rm -f $(OBJ)
+	@echo ${PURPLE}"[INFO] Removed .o from the libft"${WHITE}
 
 fclean : clean
-	/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME)
+	@echo ${PURPLE}"[INFO] Removed .o and libft.a from the libft"${WHITE}
 
 compil : all clean
 

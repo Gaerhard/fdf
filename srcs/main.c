@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 10:34:15 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/28 20:13:08 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/08 17:20:13 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,41 +24,46 @@
 **}
 */
 
-int		init(t_all *p)
+int		init(t_env *e)
 {
-	p->length = (p->n_col * 4 + 50 > 1000) ? p->n_col * 4 + 50 : 1000;
-	p->height = (p->n_line * 2 > 1000) ? (p->n_line * 2) : 1000;
-	if (!(p->mlx = mlx_init()))
+//	void	*tmp;
+
+	e->m.width = (e->m.nc * 4 + 50 > 1000) ? e->m.nc * 4 + 50 : 1000;
+	e->m.height = (e->m.nl * 2 > 1000) ? (e->m.nl * 2) : 1000;
+	e->sc = 1.0;
+	if (!(e->p.mlx = mlx_init()))
 		return (-1);
-	if (!(p->win = mlx_new_window(p->mlx, p->length , p->height, "fdf")))
+	if (!(e->p.win = mlx_new_window(e->p.mlx, e->m.width , e->m.height, "fdf")))
 		return (-1);
-	draw_map(p);
-	mlx_hook(p->win, 2, 0, key_press, p);
-	mlx_hook(p->win, 17, 0, mlx_close, p);
-	mlx_loop(p->mlx);
+	e->img.ptr = mlx_new_image(e->p.mlx, e->m.width, e->m.height);
+	e->img.data = (int*)mlx_get_data_addr(e->img.ptr, &e->img.bpp, &e->img.size_l, &e->img.endian);
+	draw_map(e);
+	mlx_hook(e->p.win, 2, 0, key_press, e);
+	mlx_hook(e->p.win, 17, 0, mlx_close, e);
+	mlx_loop(e->p.mlx);
 	return (0);
 }
 
 int		main(int argc, char **argv)
 {
 	t_list	*lst;
-	t_all	*p;
+	t_env	*e;
 
-	p = malloc(sizeof(*p) * 1);
 	if (argc != 2)
 		return (ft_print_return("Wrong number of arguments", 2));
+	e = malloc(sizeof(*e) * 1);
 	if (!(lst = reader(argv[1])))
 		return (ft_print_return("Failed to read file", 2));
 	else
 	{
-		if ((p->n_line = ft_lstlength(lst)) <= 0)
+		if ((e->m.nl = ft_lstlength(lst)) <= 0)
 			return (ft_print_return("Invalid file", 2));
-		if (!(p->tab = malloc(sizeof(int*) * p->n_line)))
+		if (!(e->m.tab = malloc(sizeof(int*) * e->m.nl)))
 			return (ft_print_return("Failed to malloc correct size", 2));
-		if ((p->n_col = stoi(lst, &(p->tab))) == 0)
+		if ((e->m.nc = stoi(lst, &(e->m.tab))) == 0)
 			return (ft_print_return("Invalid file", 2));
 	}
-	if (init (p) < 0)
+	if (init (e) < 0)
 		return (0);
 	return (0);
 }

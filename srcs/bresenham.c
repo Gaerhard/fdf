@@ -6,60 +6,67 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 11:21:08 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/28 16:50:02 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/08 15:32:58 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int		draw_line_y(t_all *p)
+static int	vertical_slope(t_env *e, t_incr incr)
 {
-	t_incr	incr;
 	int		x;
 	int		y;
 	int		i;
 
-	incr.xincr = (p->x1 < p->x2 ? 1 : -1);
-	incr.yincr = (p->y1 < p->y2 ? 1 : -1);
-	x = p->x1;
+	x = e->v1.x;
 	i = -1;
-	y = p->y1;
-	incr.error = ft_abs(p->y2 - p->y1);
-	while (++i < ft_abs(p->y2 - p->y1))
+	y = e->v1.y;
+	incr.error = e->delta_y;
+	while (++i < e->delta_y)
 	{
 		y += incr.yincr;
-		incr.error += ft_abs(p->x2 - p->x1) * 2;
-		x += (incr.error > ft_abs(p->y2 - p->y1) ? incr.xincr : 0);
-		incr.error -= (incr.error > ft_abs(p->y2 - p->y1) ?
-				(ft_abs(p->y2 - p->y1) * 2) : 0);
-		mlx_pixel_put(p->mlx, p->win, x, y, ft_color(p, x, y));
+		incr.error += e->delta_x * 2;
+		x += (incr.error > e->delta_y ? incr.xincr : 0);
+		incr.error -= (incr.error > e->delta_y ? e->delta_y * 2 : 0);
+		if (y * e->m.width + x >= 0 &&
+				y * e->m.width + x < e->m.width * e->m.height)
+			e->img.data[y * e->m.width + x] = ft_color(e, x, y);
 	}
 	return (1);
 }
 
-int				draw_line(t_all *p)
+static int	horizontal_slope(t_env *e, t_incr incr)
 {
-	t_incr	incr;
 	int		x;
 	int		y;
 	int		i;
 
-	incr.xincr = (p->x1 < p->x2 ? 1 : -1);
-	incr.yincr = (p->y1 < p->y2 ? 1 : -1);
-	x = p->x1;
+	x = e->v1.x;
 	i = -1;
-	y = p->y1;
-	if (ft_abs(p->x2 - p->x1) < ft_abs(p->y2 - p->y1))
-		return (draw_line_y(p));
-	incr.error = ft_abs(p->x2 - p->x1);
-	while (++i < ft_abs(p->x2 - p->x1))
+	y = e->v1.y;
+	incr.error = e->delta_x;
+	while (++i < e->delta_x)
 	{
 		x += incr.xincr;
-		incr.error += ft_abs(p->y2 - p->y1) * 2;
-		y += (incr.error > ft_abs(p->x2 - p->x1) ? incr.yincr : 0);
-		incr.error -= (incr.error > ft_abs(p->x2 - p->x1) ?
-				(ft_abs(p->x2 - p->x1) * 2) : 0);
-		mlx_pixel_put(p->mlx, p->win, x, y, ft_color(p, x, y));
+		incr.error += e->delta_y * 2;
+		y += (incr.error > e->delta_x ? incr.yincr : 0);
+		incr.error -= (incr.error > e->delta_x ? (e->delta_x * 2) : 0);
+		if (y * e->m.width + x >= 0 &&
+				y * e->m.width + x < e->m.width * e->m.height)
+			e->img.data[y * e->m.width + x] = ft_color(e, x, y);
 	}
 	return (1);
+}
+
+int			draw_line(t_env *e)
+{
+	t_incr	incr;
+
+	incr.xincr = (e->v1.x < e->v2.x ? 1 : -1);
+	incr.yincr = (e->v1.y < e->v2.y ? 1 : -1);
+	e->delta_x = ft_abs(e->v2.x - e->v1.x);
+	e->delta_y = ft_abs(e->v2.y - e->v1.y);
+	if (e->delta_x < e->delta_y)
+		return (vertical_slope(e, incr));
+	return (horizontal_slope(e, incr));
 }
