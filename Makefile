@@ -6,7 +6,7 @@
 #    By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/29 15:24:01 by gaerhard          #+#    #+#              #
-#    Updated: 2018/12/05 15:57:45 by gaerhard         ###   ########.fr        #
+#    Updated: 2018/12/10 18:51:14 by gaerhard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC = srcs/main.c srcs/parsing.c srcs/events.c srcs/graphic.c srcs/utils.c \
 OBJ = $(SRC:.c=.o)
 LIB = libft/libft.a
 INCLUDES = includes
-CFLAGS = -Wall -Wextra -Werror -I $(INCLUDES)
+CFLAGS = -g -Wall -Wextra -Werror -I $(INCLUDES)
 MLXFLAGS = -lmlx -framework OPENgL -framework AppKit
 RED := "\033[0;31m"
 GREEN := "\033[0;32m"

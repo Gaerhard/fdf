@@ -6,22 +6,22 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 10:34:15 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/08 17:20:13 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/10 22:06:13 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /*
-**static void	clean_tab(int ***tab, int l)
-**{
-**	int i;
-**
-**	i = -1;
-**	while (++i <= l)
-**		free(tab[0][i]);
-**	free(tab[0]);
-**}
+static void	clean_tab(int **tab, int l)
+{
+	int i;
+
+	i = -1;
+	while (++i <= l)
+		free(tab[i]);
+	free(tab);
+}
 */
 
 int		init(t_env *e)
@@ -31,6 +31,7 @@ int		init(t_env *e)
 	e->m.width = (e->m.nc * 4 + 50 > 1000) ? e->m.nc * 4 + 50 : 1000;
 	e->m.height = (e->m.nl * 2 > 1000) ? (e->m.nl * 2) : 1000;
 	e->sc = 1.0;
+	e->projection = ISO;
 	if (!(e->p.mlx = mlx_init()))
 		return (-1);
 	if (!(e->p.win = mlx_new_window(e->p.mlx, e->m.width , e->m.height, "fdf")))

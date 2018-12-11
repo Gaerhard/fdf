@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 21:04:30 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/08 17:28:10 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/10 21:57:49 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 # include "libft.h"
 # include "mlx.h"
 # include <math.h>
-
+# define ISO 1
+# define PARALLELE 2
 /*
 ** structure contenant les donnes de l'image mlx utilisee
 */
@@ -99,6 +100,7 @@ typedef struct	s_env
 	t_map		m;
 	int			x;
 	int			y;
+	int			projection;
 	double		sc;
 	int			delta_x;
 	int			delta_y;

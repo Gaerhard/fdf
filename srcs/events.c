@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:36 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/08 17:58:06 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/10 22:13:25 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,15 @@ int		key_press(int key, t_env *e)
 		v -= 0.1;
 		calc_new_coords(v, e);
 	}
-	if (key == 69)
+	else if (key == 69)
 	{
 		v += 0.1;
 		calc_new_coords(v, e);
+	}
+	else if (key == 257)
+	{
+		e->projection = (e->projection == ISO) ? PARALLELE : ISO;
+		calc_new_coords(0, e);
 	}
 	return (0);
 }

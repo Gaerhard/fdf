@@ -6,30 +6,39 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 10:20:48 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/08 18:59:28 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/10 22:37:40 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
-static int		px(int x, int y)
+static int		px(int x, int y, t_env *e)
 {
-	return (2 * (x + y));
+	if (e->projection == ISO)
+		return (2 * (x + y));
+	else if (e->projection == PARALLELE)
+		return ((x + e->m.nl - y));
+	return (0);
 }
 
-static int		py(int x, int y)
+static int		py(int x, int y, t_env *e)
 {
-	return (y - x);
+	if (e->projection == ISO)
+		return (y - x);
+	else if (e->projection == PARALLELE)
+		return (y * 2);
+	return (0);
 }
 
 static	t_env	*calc_coords(t_env *e)
 {
-	e->v1.x = px(e->x, e->y) * e->m.scale;
+	e->v1.x = px(e->x, e->y, e) * e->m.scale;
 	e->v1.z = e->m.tab[e->y][e->x] * e->sc;
-	e->v1.y = py(e->x, e->y) * e->m.scale + e->m.height / 2 - e->v1.z;
-	e->v2.x = px(e->x + 1, e->y) * e->m.scale;
+	e->v1.y = py(e->x, e->y, e) * e->m.scale + e->m.height / 2 - e->v1.z;
+	e->v2.x = px(e->x + 1, e->y, e) * e->m.scale;
 	e->v2.z = e->m.tab[e->y][e->x + 1] * e->sc;
-	e->v2.y = py(e->x + 1, e->y) * e->m.scale + e->m.height / 2 - e->v2.z;
+	e->v2.y = py(e->x + 1, e->y, e) * 
+		e->m.scale + e->m.height / 2 - e->v2.z;
 	if (e->v1.z <= 0)
 		e->v1.c = 0x00009FFF;
 	else if (e->v1.z >= 1 && e->v1.z <= 40)
@@ -51,12 +60,12 @@ static	t_env	*calc_coords(t_env *e)
 
 static	t_env	*calc_coords_2(t_env *e)
 {
-	e->v1.x = px(e->x, e->y) * e->m.scale;
+	e->v1.x = px(e->x, e->y, e) * e->m.scale;
 	e->v1.z = e->m.tab[e->y][e->x] * e->sc;
-	e->v1.y = py(e->x, e->y) * e->m.scale + e->m.height / 2 - e->v1.z;
-	e->v2.x = px(e->x, e->y + 1) * e->m.scale;
+	e->v1.y = py(e->x, e->y, e) * e->m.scale + e->m.height / 2 - e->v1.z;
+	e->v2.x = px(e->x, e->y + 1, e) * e->m.scale;
 	e->v2.z = e->m.tab[e->y + 1][e->x] * e->sc;
-	e->v2.y = py(e->x, e->y + 1) * e->m.scale + e->m.height / 2 - e->v2.z;
+	e->v2.y = py(e->x, e->y + 1, e) * e->m.scale + e->m.height / 2 - e->v2.z;
 	if (e->v1.z <= 0)
 		e->v1.c = 0x00009FFF/* - ft_abs(e->v1.z)*/;
 	else if (e->v1.z >= 1 && e->v1.z <= 40)
