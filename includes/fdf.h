@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 21:04:30 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/10 21:57:49 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/19 18:39:05 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 # include <math.h>
 # define ISO 1
 # define PARALLELE 2
+# define TABX e->m.tab[y][x].x
+# define TABXX e->m.tab[y][x + 1].x
+# define TABXY e->m.tab[y + 1][x].x
+# define TABY e->m.tab[y][x].y
+# define TABYX e->m.tab[y][x + 1].y
+# define TABYY e->m.tab[y + 1][x].y
+# define TABZ e->m.tab[y][x].z
+# define TABZX e->m.tab[y][x + 1].z
+# define TABZY e->m.tab[y + 1][x].z
+# define TABC e->m.tab[y][x].c
 /*
 ** structure contenant les donnes de l'image mlx utilisee
 */
@@ -41,38 +51,24 @@ typedef struct	s_mlx
 }				t_mlx;
 
 /*
-** structure contenant la matrice du premier point.
+** structure contenat la matrice des points a tracer et relier
 ** x,y,z etant les coordonnees et c etant la couleur du point
 */
 
-typedef struct	s_m1
+typedef struct	s_m
 {
-	double			x;
-	double			y;
-	double			z;
+	double		x;
+	double		y;
+	double		z;
 	int			c;
-}				t_m1;
-
-/*
-** structure contenat la matrice du deuxieme point.
-** x,y,z etant les coordonnees et c etant la couleur du point
-*/
-
-typedef struct	s_m2
-{
-	double			x;
-	double			y;
-	double			z;
-	int			c;
-}				t_m2;
+}				t_m;
 
 /*
 ** structure contant les differentes infos de la fenetre et de la map
 ** height et width sont respectivement la hauteur et la largeur de la fenetre
 ** nl et nc sont respectivement le nombre de lignes et de colonnes dans
 ** la map
-** tab est un tableau de tableau d'int tab[i][j] avec i = coordonnee y
-** j = coordonnee x et tab[i][j] = coordonnee z
+** tab est un tableau de tableau de matrices contenat les coordonnees despoints
 ** scale est l'echelle de la map, plus precisement la distance entre deux 
 ** coordonnees
 */
@@ -83,9 +79,21 @@ typedef struct	s_map
 	int			nc;
 	int			height;
 	int			width;
-	int			scale;
-	int			**tab;
+	float		scale;
+	t_m			**tab;
 }				t_map;
+
+/*
+** structure contenant la valeur du delpacement en x et y de la map
+** sc contient l'echelle en z (manipulee avec + et -)
+*/
+
+typedef struct	s_move
+{
+	double		sc;
+	int			x;
+	int			y;
+}				t_move;
 
 /*
 ** structure contenant toutes les autres structures pour y avoir acces partout
@@ -95,40 +103,15 @@ typedef struct	s_env
 {
 	t_mlx		p;
 	t_img		img;
-	t_m1		v1;
-	t_m2		v2;
+	t_m			v1;
+	t_m			v2;
 	t_map		m;
-	int			x;
-	int			y;
+	t_move		move;
 	int			projection;
-	double		sc;
+	int			start;
 	int			delta_x;
 	int			delta_y;
 }				t_env;
-
-typedef struct	s_all
-{
-	t_mlx		*p;
-	void		*win;
-	void		*mlx;
-	int			**tab;
-	int			n_line;
-	int			n_col;
-	int			height;
-	int			length;
-	int			x;
-	int			y;
-	int			x1;
-	int			x2;
-	int			y1;
-	int			y2;
-	int			z1;
-	int			z2;
-	int			color1;
-	int			color2;
-	int			scale;
-	t_img		*img;
-}				t_all;
 
 /*
 ** structure utilisee lors du trace de ligne dans l'algo de bresenham pour
@@ -143,12 +126,32 @@ typedef struct	s_incr
 	int			yincr;
 }				t_incr;
 
+typedef struct	s_lim
+{
+	int			z_max;
+	int			z_min;
+}				t_lim;
+
 t_list			*reader(char *s);
-int				stoi(t_list *begin_list, int ***tab);
+double			px(double x, double y, t_env *e);
+double			py(double x, double y, t_env *e);
+double			get_vertical_scale(t_env *e);
+int				stoi(t_list *begin_list, t_m **tab);
 int				draw_line(t_env *e);
 int				key_press(int key, t_env *e);
+int				mouse_press(int button, int x, int y, t_env *e);
 int				ft_color(t_env *e, int x, int y);
 int				mlx_close(t_env *e);
+void			set_colors(t_env *e);
+float			calc_scale(t_env *e);
+void			scale_map(t_env *e);
 void			draw_map(t_env *e);
+void			x_axis_rotation(t_env *e, int key);
+void			y_axis_rotation(t_env *e, int key);
+void			z_axis_rotation(t_env *e, int key);
+void			set_levels(t_env *e, int x, int y);
+void			center_map(t_env *e);
+void			redraw(t_env *e);
+t_lim			get_limits(t_env *e);
 
 #endif

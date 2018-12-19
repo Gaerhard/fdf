@@ -6,7 +6,7 @@
 /*   By: gaerhard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 14:42:14 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/21 15:20:29 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/13 14:05:40 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void				ft_scalevect(t_vect *vector, int scale);
 void				ft_lstback(t_list **begin_list, void *data, size_t size);
 void				ft_putendl_fd(const char *s, int fd);
+void				ft_putnbrendl(int n);
 void				ft_del(void *content, size_t size);
 int					ft_print_return(const char *s, int fd);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -76,7 +77,6 @@ int					ft_strnequ(const char *s1, const char *s2, size_t n);
 int					ft_sign(int nb);
 int					ft_sqrt(int nb);
 int					ft_is_prime(int nb);
-int					ft_abs(int nb);
 int					ft_dotvect(const t_vect v1, const t_vect v2);
 int					get_next_line(const int fd, char **line);
 int					ft_lstlength(t_list *beginlist);
@@ -106,5 +106,6 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_vect				ft_prodvect(const t_vect v1, const t_vect v2);
 t_vect				ft_sumvect(const t_vect v1, const t_vect v2);
 t_vect				ft_setvect(int x, int y, int z);
+double				ft_abs(double nb);
 
 #endif

@@ -6,82 +6,55 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 10:20:48 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/10 22:37:40 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/19 18:12:15 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
-static int		px(int x, int y, t_env *e)
+
+double		px(double x, double y, t_env *e)
 {
 	if (e->projection == ISO)
-		return (2 * (x + y));
+		return ((x - y) * cos(0.523599));
+		//return (2 * (x + y));
 	else if (e->projection == PARALLELE)
 		return ((x + e->m.nl - y));
 	return (0);
 }
 
-static int		py(int x, int y, t_env *e)
+double		py(double x, double y, t_env *e)
 {
 	if (e->projection == ISO)
-		return (y - x);
+		return ((x + y) * sin(0.523599));
+		//return (y - x);
 	else if (e->projection == PARALLELE)
 		return (y * 2);
 	return (0);
 }
 
-static	t_env	*calc_coords(t_env *e)
+static	t_env	*calc_coords(t_env *e, int x, int y)
 {
-	e->v1.x = px(e->x, e->y, e) * e->m.scale;
-	e->v1.z = e->m.tab[e->y][e->x] * e->sc;
-	e->v1.y = py(e->x, e->y, e) * e->m.scale + e->m.height / 2 - e->v1.z;
-	e->v2.x = px(e->x + 1, e->y, e) * e->m.scale;
-	e->v2.z = e->m.tab[e->y][e->x + 1] * e->sc;
-	e->v2.y = py(e->x + 1, e->y, e) * 
-		e->m.scale + e->m.height / 2 - e->v2.z;
-	if (e->v1.z <= 0)
-		e->v1.c = 0x00009FFF;
-	else if (e->v1.z >= 1 && e->v1.z <= 40)
-		e->v1.c = 0x00009F40 + (e->v1.z * 0x00050000);
-	else if (e->v1.z >= 41 && e->v1.z <= 70)
-		e->v1.c = 0x00999999 + e->v1.z * 0x00111111;
-	else if (e->v1.z >= 71)
-		e->v1.c = 0x00FFFFFF;
-	if (e->v2.z <= 0)
-		e->v2.c = 0x00009FFF;
-	else if (e->v2.z >= 1 && e->v2.z <= 40)
-		e->v2.c = 0x00009F40 + (e->v2.z * 0x00050000);
-	else if (e->v2.z >= 41 && e->v2.z <= 70)
-		e->v2.c = 0x00999999 + e->v2.z * 0x00111111;
-	else if(e->v2.z > 70)	
-		e->v2.c = 0x00FFFFFF;
+	e->v1.x = px(TABX, TABY, e) * e->m.scale + e->move.x;
+	e->v1.z = TABZ;
+	e->v1.y = (py(TABX, TABY, e) - e->v1.z) * e->m.scale + e->move.y;
+	e->v2.x = px(TABXX, TABYX, e) * e->m.scale + e->move.x;
+	e->v2.z = TABZX;
+	e->v2.y = (py(TABXX, TABYX, e) - e->v2.z) * e->m.scale + e->move.y;
+		e->v1.c = TABC;
+		e->v2.c = e->m.tab[y][x + 1].c;
 	return (e);
 }
 
-static	t_env	*calc_coords_2(t_env *e)
+static	t_env	*calc_coords_2(t_env *e, int x, int y)
 {
-	e->v1.x = px(e->x, e->y, e) * e->m.scale;
-	e->v1.z = e->m.tab[e->y][e->x] * e->sc;
-	e->v1.y = py(e->x, e->y, e) * e->m.scale + e->m.height / 2 - e->v1.z;
-	e->v2.x = px(e->x, e->y + 1, e) * e->m.scale;
-	e->v2.z = e->m.tab[e->y + 1][e->x] * e->sc;
-	e->v2.y = py(e->x, e->y + 1, e) * e->m.scale + e->m.height / 2 - e->v2.z;
-	if (e->v1.z <= 0)
-		e->v1.c = 0x00009FFF/* - ft_abs(e->v1.z)*/;
-	else if (e->v1.z >= 1 && e->v1.z <= 40)
-		e->v1.c = 0x00009F40 + (e->v1.z * 0x00050000);
-	else if (e->v1.z >= 41 && e->v1.z <= 70)
-		e->v1.c = 0x00999999 + e->v1.z * 0x00111111;
-	else if (e->v1.z >= 71)
-		e->v1.c = 0x00FFFFFF;
-	if (e->v2.z <= 0)
-		e->v2.c = 0x00009FFF/* - ft_abs(e->v2.z)*/;
-	else if (e->v2.z >= 1 && e->v2.z <= 40)
-		e->v2.c = 0x00009F40 + (e->v2.z * 0x00050000);
-	else if (e->v2.z >= 41 && e->v2.z <= 70)
-		e->v2.c = 0x00999999 + e->v2.z * 0x00111111;
-	else if(e->v2.z > 70)	
-		e->v2.c = 0x00FFFFFF;
+	e->v1.x = px(TABX, TABY, e) * e->m.scale + e->move.x;
+	e->v1.z = TABZ;
+	e->v1.y = (py(TABX, TABY, e) - e->v1.z) * e->m.scale + e->move.y;
+	e->v2.x = px(TABXY, TABYY, e) * e->m.scale + e->move.x;
+	e->v2.z = TABZY;
+	e->v2.y = (py(TABXY, TABYY, e) - e->v2.z) * e->m.scale + e->move.y;
+		e->v1.c = TABC;
+		e->v2.c = e->m.tab[y + 1][x].c;
 	return (e);
 }
 
@@ -92,27 +65,32 @@ static	t_env	*calc_coords_2(t_env *e)
 **	tab = array of array of ints. the coords of the map are kept within it
 **	*p = struct where the coords of the starting and final point of a line are
 **			kept
-**	s = struct to used to know what coord of tab am I working with
+**	s = struct used to know what coord of tab am I working with
 */
 
 void			draw_map(t_env *e)
 {
-	e->m.scale = (e->m.nc > e->m.nl) ?
-		(e->m.width / 4) / e->m.nc : (e->m.width / 4) / e->m.nl;
-	e->m.scale = (e->m.scale == 0) ? 1 : e->m.scale;
-	e->y = -1;
-	while (++(e->y) < e->m.nl)
+	int x;
+	int y;
+
+	if (e->start == 0)
 	{
-		e->x = -1;
-		while (++(e->x) < e->m.nc - 1)
-			draw_line(calc_coords(e));
+		e->m.scale = calc_scale(e);
+		center_map(e);
 	}
-	e->y = -1;
-	while (++(e->y) < e->m.nl - 1)
+	y = -1;
+	while (++y < e->m.nl)
 	{
-		e->x = -1;
-		while (++(e->x) < e->m.nc)
-			draw_line(calc_coords_2(e));
+		x = -1;
+		while (++x < e->m.nc - 1)
+			draw_line(calc_coords(e, x, y));
+	}
+	y = -1;
+	while (++y < e->m.nl - 1)
+	{
+		x = -1;
+		while (++x < e->m.nc)
+			draw_line(calc_coords_2(e, x, y));
 	}
 	mlx_put_image_to_window(e->p.mlx, e->p.win, e->img.ptr, 0, 0);
 }

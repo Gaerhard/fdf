@@ -6,33 +6,26 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:36 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/10 22:13:25 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/19 18:45:57 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void		calc_new_coords(double v, t_env *e)
+static int		x_shift(int key)
 {
-/*	int i;
-	int j;
+	return ((key == 123) ? -10 : 10);
+}
 
-	i = -1;
-	while (++i < e->m.nl)
-	{
-		j = -1;
-		while (++j < e->m.nc)
-		{
-			e->m.tab[i][j] += (e->m.tab[i][j] <= 0) ? 0 : v;
-			if (e->m.tab[i][j] == 1)
-				e->m.tab[i][j]++;
-		}
-	}*/
-	e->sc += v;
-	mlx_clear_window(e->p.mlx, e->p.win);
+static int		y_shift(int key)
+{
+	return ((key == 125) ? 10 : -10);
+}
+
+void		redraw(t_env *e)
+{
 	mlx_destroy_image(e->p.mlx, e->img.ptr);
 	e->img.ptr = mlx_new_image(e->p.mlx, e->m.width, e->m.height);
-	ft_bzero(e->img.data, e->m.width * e->m.height);
 	draw_map(e);
 }
 
@@ -43,37 +36,29 @@ int				mlx_close(t_env *e)
 	i = 0;
 	free(e->p.mlx);
 	free(e->p.win);
-/*	while (i < p->height)
-	{
-		free(p->tab[i]);
-		i++;
-	}
-	free(p->tab);*/
 	free(e);
 	exit (0);
 }
 
 int		key_press(int key, t_env *e)
 {
-	double v;
-
-	v = 0.0;
 	if (key == 53)
 		mlx_close(e);
-	if (key == 78)
-	{
-		v -= 0.1;
-		calc_new_coords(v, e);
-	}
-	else if (key == 69)
-	{
-		v += 0.1;
-		calc_new_coords(v, e);
-	}
 	else if (key == 257)
 	{
+		e->start = 0;
 		e->projection = (e->projection == ISO) ? PARALLELE : ISO;
-		calc_new_coords(0, e);
 	}
+	else if (key == 86 || key == 88)
+		x_axis_rotation(e, key);
+	else if (key == 91 || key == 87)
+		y_axis_rotation(e, key);
+	else if (key == 89 || key == 92)
+		z_axis_rotation(e, key);
+	else if (key == 123 || key == 124)
+		e->move.x += x_shift(key);
+	else if (key == 125 || key == 126)
+		e->move.y += y_shift(key);
+	redraw(e);
 	return (0);
 }

@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   events2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaerhard <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/10 16:01:59 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/12 20:39:15 by gaerhard         ###   ########.fr       */
+/*   Created: 2018/12/19 18:32:15 by gaerhard          #+#    #+#             */
+/*   Updated: 2018/12/19 18:41:58 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fdf.h"
 
-double		ft_abs(double nb)
+int		mouse_press(int button, int x, int y, t_env *e)
 {
-	return (nb *= ft_sign(nb));
+	(void)x;
+	(void)y;
+	if (button == 4)
+		e->m.scale += e->m.scale / 10;
+	else if (button == 5)
+		e->m.scale -= e->m.scale / 10;
+	redraw(e);
+	return (0);
 }

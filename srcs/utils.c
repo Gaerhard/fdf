@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:56:47 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/08 15:30:32 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/19 16:22:46 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,35 @@ static int		get_light(int st, int end, double percentage)
 {
 	return ((int)((1 - percentage) * st + percentage * end));
 }
-/*
-int		highest_point(int **tab, t_size size)
-{
-	int i;
-	int j;
-	int res;
 
-	i = -1;
-	res = 0;
-	while (++i < size.y)
+t_lim			get_limits(t_env *e)
+{
+	int x;
+	int y;
+	t_lim lim;
+
+	lim.z_min = 2147483647;
+	lim.z_max = -2147483648;
+	y = -1;
+	while (++y < e->m.nl)
 	{
-		j = -1;
-		while (++j < size.x)
+		x = -1;
+		while (++x < e->m.nc)
 		{
-			if (tab[i][j] > res)
-				res = tab[i][j];
+			lim.z_min = (lim.z_min > TABZ) ? TABZ : lim.z_min;
+			lim.z_max = (lim.z_max < TABZ) ? TABZ : lim.z_max;
 		}
 	}
-	return (res);
+	e->delta_x = lim.z_max - lim.z_min;
+	e->delta_y = 0;
+	e->v1.x = lim.z_min;
+	e->v2.x = lim.z_max;
+	e->v1.c = 0x00FFFFFF;
+	e->v2.c = 0x00FF0000;
+	return (lim);
 }
-*/
-int		ft_color(t_env *e, int x, int y)
+
+int				ft_color(t_env *e, int x, int y)
 {
 	double	perc;
 	int		red;
@@ -62,4 +69,23 @@ int		ft_color(t_env *e, int x, int y)
 	green = get_light((e->v1.c >> 8) & 0xFF, (e->v2.c >> 8) & 0xFF, perc);
 	blue = get_light((e->v1.c) & 0xFF, (e->v2.c) & 0xFF, perc);
 	return ((red <<16) | (green << 8)| blue);
+}
+
+void			set_colors(t_env *e)
+{
+	int		x;
+	int		y;
+	t_lim	lim;
+
+	y = -1;
+	lim = get_limits(e);
+	while (++y < e->m.nl)
+	{
+		x = -1;
+		while (++x < e->m.nc)
+		{
+//			set_levels(e, x, y);
+			TABC = ft_color(e, TABZ, TABZ);
+		}
+	}
 }

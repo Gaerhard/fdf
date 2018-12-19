@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_putnbriendl.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaerhard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/10 16:01:59 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/12 20:39:15 by gaerhard         ###   ########.fr       */
+/*   Created: 2018/11/08 19:30:16 by gaerhard          #+#    #+#             */
+/*   Updated: 2018/12/13 14:04:58 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-double		ft_abs(double nb)
+void	ft_putnbrendl(int n)
 {
-	return (nb *= ft_sign(nb));
+	ft_putnbr_fd(n, 1);
+	ft_putchar_fd('\n', 1);
 }

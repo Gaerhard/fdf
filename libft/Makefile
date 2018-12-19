@@ -6,7 +6,7 @@
 #    By: gaerhard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 11:40:17 by gaerhard          #+#    #+#              #
-#    Updated: 2018/11/29 15:15:47 by gaerhard         ###   ########.fr        #
+#    Updated: 2018/12/13 14:05:10 by gaerhard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCS = ft_memccpy.c ft_memcpy.c ft_memset.c ft_bzero.c ft_memmove.c \
 	   ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_split.c ft_sign.c ft_is_prime.c \
 	   ft_dotvect.c ft_abs.c ft_prodvect.c ft_scalevect.c ft_sign.c ft_sqrt.c \
 	   ft_sumvect.c ft_setvect.c get_next_line.c ft_lstback.c ft_lstlength.c \
-	   ft_print_return.c ft_del.c
+	   ft_print_return.c ft_del.c ft_putnbrendl.c
 INCLUDES = ../includes
 OBJ = $(SRCS:.c=.o)
 CFLAGS = -Wall -Werror -Wextra -I $(INCLUDES)
@@ -54,3 +54,6 @@ fclean : clean
 compil : all clean
 
 re : fclean all
+
+.PHONY: re compil fclean clean all
+.SILENT: $(OBJ)

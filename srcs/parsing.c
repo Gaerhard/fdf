@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 19:22:56 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/27 18:41:19 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/15 20:49:28 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	clean_array(char ***array)
 		free(array[0][i]);
 		i++;
 	}
+	free(*array);
 }
 
 static int	array_size(char **array)
@@ -34,7 +35,14 @@ static int	array_size(char **array)
 	return (i);
 }
 
-int			stoi(t_list *begin_list, int ***tab)
+static void	fill_matrix(t_m **tab, int i, int j, int z)
+{
+	tab[i][j].x = j;
+	tab[i][j].y = i;
+	tab[i][j].z = z;
+}
+
+int			stoi(t_list *begin_list, t_m **tab)
 {
 	t_list	*lst;
 	char	**array;
@@ -52,10 +60,10 @@ int			stoi(t_list *begin_list, int ***tab)
 		if (n_coords != -1 && n_coords != array_size(array))
 			return (0);
 		n_coords = array_size(array);
-		if (!(tab[0][++i] = malloc(sizeof(int*) * array_size(array))))
+		if (!(tab[++i] = malloc(sizeof(t_m) * array_size(array))))
 			return (0);
 		while (array[++j])
-			tab[0][i][j] = ft_atoi(array[j]);
+			fill_matrix(tab, i, j, ft_atoi(array[j]));
 		clean_array(&array);
 		lst = lst->next;
 	}
