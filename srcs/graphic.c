@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 10:20:48 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/19 18:12:15 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/20 16:42:11 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,18 @@
 double		px(double x, double y, t_env *e)
 {
 	if (e->projection == ISO)
-		return ((x - y) * cos(0.523599));
-		//return (2 * (x + y));
+		return ((x - y) * 0.86602540378);
 	else if (e->projection == PARALLELE)
-		return ((x + e->m.nl - y));
+		return ((x - y));
 	return (0);
 }
 
 double		py(double x, double y, t_env *e)
 {
 	if (e->projection == ISO)
-		return ((x + y) * sin(0.523599));
-		//return (y - x);
+		return ((x + y) * 0.5);
 	else if (e->projection == PARALLELE)
-		return (y * 2);
+		return (y);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 16:09:36 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/19 18:45:57 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/20 11:41:03 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void		redraw(t_env *e)
 {
 	mlx_destroy_image(e->p.mlx, e->img.ptr);
 	e->img.ptr = mlx_new_image(e->p.mlx, e->m.width, e->m.height);
+	e->img.data = (int*)mlx_get_data_addr(e->img.ptr, &e->img.bpp, 
+			&e->img.size_l, &e->img.endian);
 	draw_map(e);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 21:04:30 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/19 18:39:05 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/20 16:46:06 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void			draw_map(t_env *e);
 void			x_axis_rotation(t_env *e, int key);
 void			y_axis_rotation(t_env *e, int key);
 void			z_axis_rotation(t_env *e, int key);
-void			set_levels(t_env *e, int x, int y);
+void			set_levels(t_env *e, int x, int y, t_lim lim);
 void			center_map(t_env *e);
 void			redraw(t_env *e);
 t_lim			get_limits(t_env *e);

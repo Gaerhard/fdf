@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 19:22:56 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/15 20:49:28 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/20 14:23:50 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_list		*reader(char *s)
 	if ((fd = open(s, O_RDONLY)) < 0)
 		return (NULL);
 	begin_list = NULL;
-	while (get_next_line(fd, &line))
+	while (get_next_line(fd, &line) > 0)
 	{
 		ft_lstback(&begin_list, line, ft_strlen(line) + 1);
 		ft_strdel(&line);

@@ -6,7 +6,7 @@
 /*   By: gaerhard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 15:30:16 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/11/08 15:32:07 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/20 12:11:06 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,8 @@
 
 void	ft_strdel(char **as)
 {
-	ft_memdel((void **)as);
+	if (!as)
+		return ;
+	free(*as);
+	*as = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:56:47 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/19 16:22:46 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/20 16:53:33 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ t_lim			get_limits(t_env *e)
 	e->delta_y = 0;
 	e->v1.x = lim.z_min;
 	e->v2.x = lim.z_max;
-	e->v1.c = 0x00FFFFFF;
-	e->v2.c = 0x00FF0000;
 	return (lim);
 }
 
@@ -84,8 +82,8 @@ void			set_colors(t_env *e)
 		x = -1;
 		while (++x < e->m.nc)
 		{
-//			set_levels(e, x, y);
-			TABC = ft_color(e, TABZ, TABZ);
+			set_levels(e, x, y, lim);
+		//	TABC = ft_color(e, TABZ, TABZ);
 		}
 	}
 }

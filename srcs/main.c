@@ -6,18 +6,26 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 10:34:15 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/19 18:35:08 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/20 17:12:32 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
+
+void	__attribute__((destructor)) end()
+{
+	printf("destructor loop");
+	while (1);
+}
+
 int		init(t_env *e)
 {
-	e->m.width = 1080;
-	e->m.height = 980;
+	e->m.width = 1920;
+	e->m.height = 1280;
 	e->move.sc = get_vertical_scale(e);
 	scale_map(e);
+	set_colors(e);
 	e->start = 0;
 	e->move.x = 0;
 	e->move.y = 0;
@@ -53,10 +61,10 @@ int		main(int argc, char **argv)
 			return (ft_print_return("Invalid file", 2));
 		if (!(e->m.tab = malloc(sizeof(t_m*) * e->m.nl)))
 			return (ft_print_return("Failed to malloc correct size", 2));
-		if ((e->m.nc = stoi(lst, (e->m.tab))) == 0)
+		if ((e->m.nc = stoi(lst, (e->m.tab))) == 0 || 
+				(e->m.nc <= 1 && e->m.nl <= 1))
 			return (ft_print_return("Invalid file", 2));
 	}
-	set_colors(e);
 	if (init(e) < 0)
 		return (0);
 	return (0);
