@@ -6,7 +6,7 @@
 /*   By: gaerhard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 14:42:14 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/20 14:27:32 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/20 18:20:18 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int					ft_is_prime(int nb);
 int					ft_dotvect(const t_vect v1, const t_vect v2);
 int					get_next_line(const int fd, char **line);
 int					ft_lstlength(t_list *beginlist);
+int					ft_free_return(char *str, int fd, void *p);
 char				*ft_strdup(const char *s1);
 char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strncpy(char *dst, const char *src, size_t n);

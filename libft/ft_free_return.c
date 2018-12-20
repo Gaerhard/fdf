@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstback.c                                       :+:      :+:    :+:   */
+/*   ft_free_return.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/20 15:22:51 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/20 19:31:34 by gaerhard         ###   ########.fr       */
+/*   Created: 2018/12/20 18:18:50 by gaerhard          #+#    #+#             */
+/*   Updated: 2018/12/20 18:20:47 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstback(t_list **begin_list, void *data, size_t size)
+int		ft_free_return(char *str, int fd, void *p)
 {
-	t_list *list;
-
-	list = *begin_list;
-	if (list)
-	{
-		while (list->next)
-			list = list->next;
-		list->next = ft_lstnew(data, size);
-	}
-	else
-		*begin_list = ft_lstnew(data, size);
+	free(p);
+	ft_putendl_fd(str, fd);
+	return (0);
 }

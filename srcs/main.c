@@ -6,18 +6,19 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 10:34:15 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/20 17:12:32 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/20 19:38:51 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
-void	__attribute__((destructor)) end()
-{
-	printf("destructor loop");
-	while (1);
-}
+/*
+**void	__attribute__((destructor)) end()
+**{
+**	printf("destructor loop");
+**	while (1);
+**}
+*/
 
 int		init(t_env *e)
 {
@@ -32,10 +33,10 @@ int		init(t_env *e)
 	e->projection = ISO;
 	if (!(e->p.mlx = mlx_init()))
 		return (-1);
-	if (!(e->p.win = mlx_new_window(e->p.mlx, e->m.width , e->m.height, "fdf")))
+	if (!(e->p.win = mlx_new_window(e->p.mlx, e->m.width, e->m.height, "fdf")))
 		return (-1);
 	e->img.ptr = mlx_new_image(e->p.mlx, e->m.width, e->m.height);
-	e->img.data = (int*)mlx_get_data_addr(e->img.ptr, &e->img.bpp, 
+	e->img.data = (int*)mlx_get_data_addr(e->img.ptr, &e->img.bpp,
 			&e->img.size_l, &e->img.endian);
 	draw_map(e);
 	mlx_hook(e->p.win, 2, 0, key_press, e);
@@ -54,16 +55,16 @@ int		main(int argc, char **argv)
 		return (ft_print_return("Wrong number of arguments", 2));
 	e = malloc(sizeof(*e) * 1);
 	if (!(lst = reader(argv[1])))
-		return (ft_print_return("Failed to read file", 2));
+		return (ft_free_return("Failed to read file", 2, e));
 	else
 	{
 		if ((e->m.nl = ft_lstlength(lst)) <= 0)
-			return (ft_print_return("Invalid file", 2));
+			return (ft_free_return("Invalid file", 2, e));
 		if (!(e->m.tab = malloc(sizeof(t_m*) * e->m.nl)))
-			return (ft_print_return("Failed to malloc correct size", 2));
-		if ((e->m.nc = stoi(lst, (e->m.tab))) == 0 || 
+			return (ft_free_return("Failed to malloc correct size", 2, e));
+		if ((e->m.nc = stoi(lst, (e->m.tab))) == 0 ||
 				(e->m.nc <= 1 && e->m.nl <= 1))
-			return (ft_print_return("Invalid file", 2));
+			return (ft_free_return("Invalid file", 2, e));
 	}
 	if (init(e) < 0)
 		return (0);

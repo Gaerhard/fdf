@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 15:09:07 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/20 14:23:03 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/20 19:32:17 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ static	void	set_next_l(char **str, int fd)
 		str[0] = tmp;
 	}
 	else
-	{
-		ft_putnbr(fd);
-		ft_strdel(&str[0]);}
+		ft_strdel(&str[0]);
 }
 
 int				get_next_line(const int fd, char **line)

@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 21:04:30 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/20 16:46:06 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/20 19:29:32 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <math.h>
 # define ISO 1
 # define PARALLELE 2
+# define CURVILIGNE 3
 # define TABX e->m.tab[y][x].x
 # define TABXX e->m.tab[y][x + 1].x
 # define TABXY e->m.tab[y + 1][x].x

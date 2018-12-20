@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:25:01 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/19 16:09:14 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/20 19:39:13 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	translation(t_env *e, int tx, int ty)
 	}
 }
 
-void	x_axis_rotation(t_env *e, int key)
+void		x_axis_rotation(t_env *e, int key)
 {
 	int		x;
 	int		y;
@@ -55,7 +55,7 @@ void	x_axis_rotation(t_env *e, int key)
 	translation(e, e->m.nc / 2, e->m.nl / 2);
 }
 
-void	y_axis_rotation(t_env *e, int key)
+void		y_axis_rotation(t_env *e, int key)
 {
 	int		x;
 	int		y;
@@ -81,7 +81,7 @@ void	y_axis_rotation(t_env *e, int key)
 	translation(e, e->m.nc / 2, e->m.nl / 2);
 }
 
-void	z_axis_rotation(t_env *e, int key)
+void		z_axis_rotation(t_env *e, int key)
 {
 	int		x;
 	int		y;

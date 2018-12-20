@@ -6,13 +6,13 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 10:20:48 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/20 16:42:11 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/20 19:36:07 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-double		px(double x, double y, t_env *e)
+double			px(double x, double y, t_env *e)
 {
 	if (e->projection == ISO)
 		return ((x - y) * 0.86602540378);
@@ -21,7 +21,7 @@ double		px(double x, double y, t_env *e)
 	return (0);
 }
 
-double		py(double x, double y, t_env *e)
+double			py(double x, double y, t_env *e)
 {
 	if (e->projection == ISO)
 		return ((x + y) * 0.5);
@@ -38,8 +38,8 @@ static	t_env	*calc_coords(t_env *e, int x, int y)
 	e->v2.x = px(TABXX, TABYX, e) * e->m.scale + e->move.x;
 	e->v2.z = TABZX;
 	e->v2.y = (py(TABXX, TABYX, e) - e->v2.z) * e->m.scale + e->move.y;
-		e->v1.c = TABC;
-		e->v2.c = e->m.tab[y][x + 1].c;
+	e->v1.c = TABC;
+	e->v2.c = e->m.tab[y][x + 1].c;
 	return (e);
 }
 
@@ -51,8 +51,8 @@ static	t_env	*calc_coords_2(t_env *e, int x, int y)
 	e->v2.x = px(TABXY, TABYY, e) * e->m.scale + e->move.x;
 	e->v2.z = TABZY;
 	e->v2.y = (py(TABXY, TABYY, e) - e->v2.z) * e->m.scale + e->move.y;
-		e->v1.c = TABC;
-		e->v2.c = e->m.tab[y + 1][x].c;
+	e->v1.c = TABC;
+	e->v2.c = e->m.tab[y + 1][x].c;
 	return (e);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:56:47 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/20 16:53:33 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/20 19:41:07 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static int		get_light(int st, int end, double percentage)
 
 t_lim			get_limits(t_env *e)
 {
-	int x;
-	int y;
-	t_lim lim;
+	int		x;
+	int		y;
+	t_lim	lim;
 
 	lim.z_min = 2147483647;
 	lim.z_max = -2147483648;
@@ -63,10 +63,10 @@ int				ft_color(t_env *e, int x, int y)
 		perc = percent(e->v1.x, e->v2.x, x);
 	else
 		perc = percent(e->v1.y, e->v2.y, y);
-	red = get_light((e->v1.c >> 16) & 0xFF, (e->v2.c >>16) & 0xFF, perc);
+	red = get_light((e->v1.c >> 16) & 0xFF, (e->v2.c >> 16) & 0xFF, perc);
 	green = get_light((e->v1.c >> 8) & 0xFF, (e->v2.c >> 8) & 0xFF, perc);
 	blue = get_light((e->v1.c) & 0xFF, (e->v2.c) & 0xFF, perc);
-	return ((red <<16) | (green << 8)| blue);
+	return ((red << 16) | (green << 8) | blue);
 }
 
 void			set_colors(t_env *e)
@@ -81,9 +81,6 @@ void			set_colors(t_env *e)
 	{
 		x = -1;
 		while (++x < e->m.nc)
-		{
 			set_levels(e, x, y, lim);
-		//	TABC = ft_color(e, TABZ, TABZ);
-		}
 	}
 }

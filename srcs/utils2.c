@@ -6,19 +6,13 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 17:39:58 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/20 17:02:27 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/20 19:42:40 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-/*
-static void		fill_l(t_env *e, int min, int max)
-{
-	e->v1.x = min;
-	e->v2.x = max;
-}
-*/
-void			scale_map(t_env *e)
+
+void	scale_map(t_env *e)
 {
 	int x;
 	int y;
@@ -34,7 +28,7 @@ void			scale_map(t_env *e)
 	}
 }
 
-double			get_vertical_scale(t_env *e)
+double	get_vertical_scale(t_env *e)
 {
 	t_lim lim;
 
@@ -59,6 +53,6 @@ void	set_levels(t_env *e, int x, int y, t_lim lim)
 		TABC = 0x0075552D;
 	else if (TABZ > 5 * e->delta_x / 14 && TABZ <= 6 * e->delta_x / 14)
 		TABC = 0x00583405;
-	else if (TABZ > 6 * e->delta_x / 14 /*&& TABZ <= 7 * e->delta_x / 14*/)
+	else if (TABZ > 6 * e->delta_x / 14)
 		TABC = 0x00FFFFFF;
 }
