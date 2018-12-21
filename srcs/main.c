@@ -6,19 +6,11 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 10:34:15 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/21 12:37:21 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/21 15:08:37 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-/*
-**void	__attribute__((destructor)) end()
-**{
-**	printf("destructor loop");
-**	while (1);
-**}
-*/
 
 int		init(t_env *e)
 {

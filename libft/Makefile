@@ -6,7 +6,7 @@
 #    By: gaerhard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 11:40:17 by gaerhard          #+#    #+#              #
-#    Updated: 2018/12/20 18:19:46 by gaerhard         ###   ########.fr        #
+#    Updated: 2018/12/21 15:03:07 by gaerhard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS = ft_memccpy.c ft_memcpy.c ft_memset.c ft_bzero.c ft_memmove.c \
 	   ft_print_return.c ft_del.c ft_putnbrendl.c ft_free_return.c
 INCLUDES = ../includes
 OBJ = $(SRCS:.c=.o)
-CFLAGS = -Wall -Werror -Wextra -I $(INCLUDES)
+CFLAGS = -Wall -Werror -Wextra -I $(INCLUDES) -O3
 RED := "\033[0;31m"
 GREEN := "\033[0;32m"
 BLUE := "\033[0;34m"

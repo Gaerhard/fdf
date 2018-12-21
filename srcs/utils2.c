@@ -6,35 +6,11 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 17:39:58 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/20 19:42:40 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/21 15:02:27 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	scale_map(t_env *e)
-{
-	int x;
-	int y;
-
-	y = -1;
-	while (++y < e->m.nl)
-	{
-		x = -1;
-		while (++x < e->m.nc)
-		{
-			TABZ = TABZ * e->move.sc;
-		}
-	}
-}
-
-double	get_vertical_scale(t_env *e)
-{
-	t_lim lim;
-
-	lim = get_limits(e);
-	return ((double)e->m.nl / ((double)lim.z_max * 10));
-}
 
 void	set_levels(t_env *e, int x, int y, t_lim lim)
 {

@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 14:55:54 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/20 19:39:48 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/21 16:01:12 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,30 @@ float		calc_scale(t_env *e)
 	if (d_x > d_y)
 		return (e->m.width / (d_x) * 3 / 4);
 	return (e->m.height / (d_y) * 3 / 4);
+}
+
+void		scale_map(t_env *e)
+{
+	int x;
+	int y;
+
+	y = -1;
+	while (++y < e->m.nl)
+	{
+		x = -1;
+		while (++x < e->m.nc)
+			TABZ = TABZ * e->move.sc;
+	}
+}
+
+double		get_vertical_scale(t_env *e)
+{
+	t_lim lim;
+
+	lim = get_limits(e);
+	if (lim.z_max == 0)
+		return (1);
+	return ((double)e->m.nl / ((double)ft_abs(lim.z_max) * 10));
 }
 
 void		center_map(t_env *e)

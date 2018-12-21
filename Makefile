@@ -6,7 +6,7 @@
 #    By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/29 15:24:01 by gaerhard          #+#    #+#              #
-#    Updated: 2018/12/20 12:27:53 by gaerhard         ###   ########.fr        #
+#    Updated: 2018/12/21 16:46:56 by gaerhard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,12 @@ $(NAME): $(OBJ) $(LIB)
 	@echo ${GREEN}"[INFO] Compiled [$(NAME)] executable successfully!"${RESET}
 
 clean: 
+	@make clean -C libft
 	@rm -Rf $(OBJ)
 	@echo ${CYAN}"[INFO] Removed [$(OBJ)] successfully!"${RESET}
 
-fclean: clean
-	@rm -Rf libft/libft.a
-	@rm -Rf fillit
+fclean: clean fclean_lib
+	@rm -Rf fdf
 	@echo ${CYAN}"[INFO] Removed everything"${RESET}
 
 re: fclean all
@@ -46,7 +46,7 @@ lib:
 relib:
 	@make re -C libft
 
-fclean_lib: fclean
+fclean_lib:
 	@make fclean -C libft
 
 .SILENT: $(OBJ) $(LIB)

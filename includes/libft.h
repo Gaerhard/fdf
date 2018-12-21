@@ -6,7 +6,7 @@
 /*   By: gaerhard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 14:42:14 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/20 18:20:18 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/21 14:22:48 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <limits.h>
-# define BUFF_SIZE 16384
+# define BUFF_SIZE 500000
 
 typedef	struct		s_list
 {
@@ -32,6 +32,7 @@ typedef	struct		s_vect
 	int				z;
 }					t_vect;
 
+char				*ft_strjoin_free(char *s1, const char *s2);
 void				*ft_memset(void *b, int c, size_t len);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 void				*ft_memmove(void *dest, const void *src, size_t n);
