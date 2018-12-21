@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 15:09:07 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/20 19:32:17 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/21 10:58:20 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static	void	set_next_l(char **str, int fd)
 	int		nl;
 	char	*tmp;
 
+	(void)fd;
 	nl = ft_find_nl(str[0]);
 	if (str[0][nl] == '\n')
 	{
