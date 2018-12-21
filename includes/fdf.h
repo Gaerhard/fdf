@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 21:04:30 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/20 19:29:32 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/21 12:39:04 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define TABZX e->m.tab[y][x + 1].z
 # define TABZY e->m.tab[y + 1][x].z
 # define TABC e->m.tab[y][x].c
+
 /*
 ** structure contenant les donnes de l'image mlx utilisee
 */
@@ -70,7 +71,7 @@ typedef struct	s_m
 ** nl et nc sont respectivement le nombre de lignes et de colonnes dans
 ** la map
 ** tab est un tableau de tableau de matrices contenat les coordonnees despoints
-** scale est l'echelle de la map, plus precisement la distance entre deux 
+** scale est l'echelle de la map, plus precisement la distance entre deux
 ** coordonnees
 */
 
@@ -116,7 +117,7 @@ typedef struct	s_env
 
 /*
 ** structure utilisee lors du trace de ligne dans l'algo de bresenham pour
-** calculer l'incrementation de x ou y, positive ou negative et quand 
+** calculer l'incrementation de x ou y, positive ou negative et quand
 ** incrementer
 */
 

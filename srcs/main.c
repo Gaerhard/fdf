@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 10:34:15 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/20 19:38:51 by gaerhard         ###   ########.fr       */
+/*   Updated: 2018/12/21 12:37:21 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int		main(int argc, char **argv)
 
 	if (argc != 2)
 		return (ft_print_return("Wrong number of arguments", 2));
-	e = malloc(sizeof(*e) * 1);
+	if (!(e = malloc(sizeof(*e) * 1)))
+		return (ft_print_return("Failed to allocate memory", 2));
 	if (!(lst = reader(argv[1])))
 		return (ft_free_return("Failed to read file", 2, e));
 	else
@@ -67,6 +68,6 @@ int		main(int argc, char **argv)
 			return (ft_free_return("Invalid file", 2, e));
 	}
 	if (init(e) < 0)
-		return (0);
+		return (ft_free_return("Failed to init mlx", 2, e));
 	return (0);
 }
