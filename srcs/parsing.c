@@ -60,7 +60,7 @@ int			stoi(t_list *begin_list, t_m **tab)
 		if (n_coords != -1 && n_coords != array_size(array))
 			return (0);
 		n_coords = array_size(array);
-		if (!(tab[++i] = malloc(sizeof(t_m) * array_size(array))))
+		if (!(tab[++i] = malloc(sizeof(t_m) * n_coords))
 			return (0);
 		while (array[++j])
 			fill_matrix(tab, i, j, ft_atoi(array[j]));
