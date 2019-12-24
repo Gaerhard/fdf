@@ -2,7 +2,7 @@
 Fdf project from school 42. The goal of the project is to create a wireframe model
 of a map/object.
 
-## Prerequisites
+### Prerequisites
 
 Fdf only works on MacOSX.
 The following frameworks and libs are needed:
@@ -17,14 +17,14 @@ X11
 Run the make command
 ```
 
-#### Usage
+### Usage
 
 Run ./fdf with a map given in maps directory. For example
 ```
 ./fdf maps/42.fdf
 ```
 
-##### Features
+### Features
 
 * Map scaling according to window size
 * Two different displays: Isonetric and Parallel
@@ -47,5 +47,5 @@ Y axis: ⓹ ⓼
 Z axisL ⓻ ⓽
 (numpad keys)
 ```
-###### Author
+##### Author
 Gabriel Erhard
