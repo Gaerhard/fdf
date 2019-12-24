@@ -27,7 +27,7 @@ Run ./fdf with a map given in maps directory. For example
 ### Features
 
 * Map scaling according to window size
-* Two different displays: Isonetric and Parallel
+* Two different displays: Isometric and Parallel
 ```
 Tab key to switch
 ```
