@@ -47,5 +47,5 @@ Y axis: ⓹ ⓼
 Z axisL ⓻ ⓽
 (numpad keys)
 ```
-####### Author
+###### Author
 Gabriel Erhard
