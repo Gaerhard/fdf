@@ -6,7 +6,7 @@
 /*   By: gaerhard <gaerhard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 19:22:56 by gaerhard          #+#    #+#             */
-/*   Updated: 2018/12/21 14:13:25 by gaerhard         ###   ########.fr       */
+/*   Updated: 2020/01/08 11:47:22 by gaerhard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			stoi(t_list *begin_list, t_m **tab)
 		if (n_coords != -1 && n_coords != array_size(array))
 			return (0);
 		n_coords = array_size(array);
-		if (!(tab[++i] = malloc(sizeof(t_m) * n_coords))
+		if (!(tab[++i] = malloc(sizeof(t_m) * n_coords)))
 			return (0);
 		while (array[++j])
 			fill_matrix(tab, i, j, ft_atoi(array[j]));
