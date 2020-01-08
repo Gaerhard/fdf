@@ -47,5 +47,13 @@ Y axis: ⓹ ⓼
 Z axisL ⓻ ⓽
 (numpad keys)
 ```
+
+### Screenshots
+
+|42|France|World|
+|--|------|-----|
+|<img src="https://raw.githubusercontent.com/erhardschi/fdf/master/screenshots/42.png" width="256" height="256" title="42.fdf">|<img src="https://raw.githubusercontent.com/erhardschi/fdf/master/screenshots/France_1.png" width="256" height="256" title="France_1">|<img src="https://raw.githubusercontent.com/erhardschi/fdf/master/screenshots/World.png" width="256" height="256" title="World">|
+||<img src="https://raw.githubusercontent.com/erhardschi/fdf/master/screenshots/France_2.png" width="256" height="256" title="France_2">||
+
 ##### Author
 Gabriel Erhard
