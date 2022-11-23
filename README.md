@@ -1,4 +1,4 @@
-# FDF
+# FDF [![gaerhard's 42 FdF Score](https://badge42.vercel.app/api/v2/clatwxbni01060fmdfe7xoii0/project/1179694)](https://github.com/JaeSeoKim/badge42)
 Fdf project from school 42. The goal of the project is to create a wireframe model
 of a map/object.
 
